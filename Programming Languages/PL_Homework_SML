@@ -1,0 +1,96 @@
+(* Homework 1 *)
+fun cycle x = tl x @ [hd x];
+(* Homework 2 *)
+fun rem x = [hd x] @ tl(tl x);
+(* Homework 3 *)
+fun order (x:int,y:int) = 
+ if y < x
+ then (y,x)
+ else (x,y);
+(* Homework 4 *)
+fun flip (nil) = nil
+ | flip (x::nil) = [x]
+ | flip (x::y) = hd y::x::flip (tl y);
+(* Homework 5 *)
+fun cycle (x::y, 0) = x::y
+ | cycle (x::y, z:int) = cycle (y@[x], z-1);
+(* Homework 6 *)
+fun del (nil, z) = nil
+ | del (x::y, 1) = y
+ | del (x::y, z) = x::del (y, z-1);
+(* Homework 7 *)
+fun suffix (nil,_) = true
+ | suffix (_,nil) = false
+ | suffix (a,b) = 
+ 	if a = b
+ 	then true
+ 	else suffix(a, tl b);
+(* Homework 8 *)
+fun prefix (nil,_) = true
+  | prefix (_,nil) = false
+  | prefix (a,b) = 
+  	if hd a = hd b
+  	then prefix(tl a, tl b)
+  	else false;
+(* Homework 9 *)
+fun high (a::nil) = a
+  | high (a::b) = 
+  	if a > high(b)
+  	then a
+  	else high b;
+(* Homework 10 *)
+fun zip (nil,nil) = nil
+  | zip (a::b, x::y) = (a,x)::zip(b,y);
+(* Homework 11 *)
+fun merge (nil,nil) = nil
+  | merge (nil,x::y) = x::y
+  | merge (a::b,nil) = a::b
+  | merge (a::b,x::y) = 
+	if a > x
+	then x::merge(a::b,y)
+	else a::merge(b,x::y);
+(* Homework 12 *)
+fun high (a,b) = if a > b then a else b;
+fun max L = foldr high (hd L) (tl L);
+(* Homework 13 *)
+fun realize (nil:int list) = nil:real list
+  | realize (a) = map Real.fromInt a;
+(* Homework 16 *)
+fun xor a = foldl (fn (x,y) => if x = y then false else true) false a;
+(* Homework 17 *)
+fun wasNegative x = 
+	let val a = List.filter (fn n => n < 0)
+	in map (fn b => ~b) (a x)
+	end;
+(* Homework 18 *)
+fun first a (nil) = NONE
+  | first a (x::xs) = 
+    if a x = true
+    then SOME x
+    else first a (xs);
+(* Homewok 19 *)
+fun last a (x) = 
+	let val z = List.filter a x
+		fun cycle (nil) = NONE
+		  | cycle (c::nil) = SOME c
+		  | cycle (c::cs) = cycle cs
+  	in cycle z
+  	end;
+(* Homework 20 *)
+fun intstr x =
+  let fun drop y =  
+    if y div 10 > 10
+     then drop(y div 10)
+    else ""^str(chr(y+48))
+  in drop x
+  end;
+listify L =
+let val x = [[]]:int list list
+  fun break   x::y::z
+      if x <= y
+      then -> same list
+      else
+     | y::z
+     | nil
+in break()
+end;
